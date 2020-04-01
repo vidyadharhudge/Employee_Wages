@@ -35,30 +35,18 @@ public class Employee_Wage
         public int Wages_For_Month ( int EMPLOYEE_WEG_PER_HOUR,int FULL_DAY_HOUR,int PARTIME_HOUR,int ABSENT)
         {
             int EMPLOYEE_PRSENT_OR_ABSENT=0;
-            int PARTIME_OR_FULLTIME=0;
+            int Working_Hours=0;
+            int Total_Working_Hours=0;
             while (countDays!=WORKINGDAYS && HOURS!=TOTAL_MONTHLY_WORKING_DAYS)
             {
                 EMPLOYEE_PRSENT_OR_ABSENT = this.Check_Attendence();
                 switch (EMPLOYEE_PRSENT_OR_ABSENT)
                 {
                     case 0:
-                            PARTIME_OR_FULLTIME = this.Check_Attendence();
-                            switch (PARTIME_OR_FULLTIME)
-                            {
-                               case 0:
-                                       EMPLOYEE_WEGES = this.Calculate_Daily_Emoployee_Wages(EMPLOYEE_WEG_PER_HOUR, FULL_DAY_HOUR);
-                                       HOURS+=FULL_DAY_HOUR;
+                                       Working_Hours=getWorkingHour(FULL_DAY_HOUR,PARTIME_HOUR);
+                                       Total_Working_Hours+=Working_Hours;
+                                       EMPLOYEE_WEGES = this.Calculate_Daily_Emoployee_Wages(EMPLOYEE_WEG_PER_HOUR, Working_Hours);
                                        break;
-
-                               case 1:
-                                       EMPLOYEE_WEGES = this.Calculate_Daily_Emoployee_Wages(EMPLOYEE_WEG_PER_HOUR, PARTIME_HOUR);
-                                       HOURS+=PARTIME_HOUR;
-                                       break;
-
-                                default:
-                                       break;
-                            }
-                            break;
                     case 1:
                             EMPLOYEE_WEGES = ABSENT;
                             break;
@@ -67,10 +55,29 @@ public class Employee_Wage
                 countDays++;
 
             }
-                System.out.println("Total Wages Are : "+Employee_Monthly_Wages+ "\nTotal days are : "+countDays + "\nTotal Hours Are : " +HOURS);
+                System.out.println("Total Wages Are : "+Employee_Monthly_Wages+ "\nTotal days are : "+countDays + "\nTotal Hours Are : " +Total_Working_Hours);
                 return Employee_Monthly_Wages;
             }
+
+    public int getWorkingHour(int full_day_hour, int partime_hour)
+    {
+        int PARTIME_OR_FULL_TIME=0;
+        PARTIME_OR_FULL_TIME=this.Check_Attendence();
+        switch (PARTIME_OR_FULL_TIME)
+        {
+            case 0 :
+                      HOURS=full_day_hour;
+                      break;
+            case 1 :
+                      HOURS=partime_hour;
+                      break;
+            default:
+                      break;
         }
+        return HOURS;
+
+    }
+}
 
         class mainD
         {
