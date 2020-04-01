@@ -3,16 +3,20 @@ import java.util.Random;
 public class Employee_Wage
 {
     int countDays;
-    int workingDays;
+    int WORKINGDAYS;
     int Employee_Monthly_Wages;
     int EMPLOYEE_WEGES;
+    int HOURS;
+    int TOTAL_MONTHLY_WORKING_DAYS;
 
     public Employee_Wage()
     {
-    countDays=0;
-    workingDays=20;
-    Employee_Monthly_Wages=0;
-    EMPLOYEE_WEGES=0;
+        countDays=0;
+        WORKINGDAYS=20;
+        HOURS=0;
+        TOTAL_MONTHLY_WORKING_DAYS=100;
+        Employee_Monthly_Wages=0;
+        EMPLOYEE_WEGES=0;
     }
     public int Check_Attendence()
      {
@@ -32,7 +36,7 @@ public class Employee_Wage
         {
             int EMPLOYEE_PRSENT_OR_ABSENT=0;
             int PARTIME_OR_FULLTIME=0;
-            while (countDays<workingDays)
+            while (countDays!=WORKINGDAYS && HOURS!=TOTAL_MONTHLY_WORKING_DAYS)
             {
                 EMPLOYEE_PRSENT_OR_ABSENT = this.Check_Attendence();
                 switch (EMPLOYEE_PRSENT_OR_ABSENT)
@@ -43,10 +47,12 @@ public class Employee_Wage
                             {
                                case 0:
                                        EMPLOYEE_WEGES = this.Calculate_Daily_Emoployee_Wages(EMPLOYEE_WEG_PER_HOUR, FULL_DAY_HOUR);
+                                       HOURS+=FULL_DAY_HOUR;
                                        break;
 
                                case 1:
                                        EMPLOYEE_WEGES = this.Calculate_Daily_Emoployee_Wages(EMPLOYEE_WEG_PER_HOUR, PARTIME_HOUR);
+                                       HOURS+=PARTIME_HOUR;
                                        break;
 
                                 default:
@@ -59,7 +65,9 @@ public class Employee_Wage
                 }
                 Employee_Monthly_Wages+=EMPLOYEE_WEGES;
                 countDays++;
+
             }
+                System.out.println("Total Wages Are : "+Employee_Monthly_Wages+ "\nTotal days are : "+countDays + "\nTotal Hours Are : " +HOURS);
                 return Employee_Monthly_Wages;
             }
         }
@@ -74,6 +82,6 @@ public class Employee_Wage
             int ABSENT=0;
             Employee_Wage emp = new Employee_Wage();
             int Monthely_Wages=emp.Wages_For_Month(EMPLOYEE_WEG_PER_HOUR,FULL_DAY_HOUR,PARTIME_HOUR,ABSENT);
-            System.out.println("Total Monthly Wages Are: "+Monthely_Wages);
+            System.out.println(Monthely_Wages);
           }
        }
