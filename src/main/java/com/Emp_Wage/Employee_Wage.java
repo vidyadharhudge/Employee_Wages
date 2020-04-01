@@ -1,5 +1,4 @@
 package com.Emp_Wage;
-
 import java.util.Random;
 public class Employee_Wage
 {
@@ -8,17 +7,18 @@ public class Employee_Wage
         Random random = new Random();
         int number = random.nextInt(2);
         if (number == 0)
-            return 0;
+             return 0;
         else
-            return 1;
+             return 1;
     }
 
-    public int Calculate_Daily_Emoployee_Wages(int employee_wage_per_hour, int full_day_hour)
-    {
-        return employee_wage_per_hour * full_day_hour;
+        public int Calculate_Daily_Emoployee_Wages ( int employee_wage_per_hour, int full_day_hour)
+        {
+             return employee_wage_per_hour * full_day_hour;
 
-    }
+        }
 }
+
     class mainD
     {
         public static void main(String[] args)
@@ -32,23 +32,33 @@ public class Employee_Wage
             int EMPLOYEE_WEGES;
             Employee_Wage emp = new Employee_Wage();
             EMPLOYEE_PRSENT_OR_ABSENT = emp.Check_Attendence();
-            if (EMPLOYEE_PRSENT_OR_ABSENT == 0)
+            switch (EMPLOYEE_PRSENT_OR_ABSENT)
             {
-                PARTIME_OR_FULLTIME = emp.Check_Attendence();
-                if (PARTIME_OR_FULLTIME == 0)
-                {
-                    EMPLOYEE_WEGES = emp.Calculate_Daily_Emoployee_Wages(EMPLOYEE_WEG_PER_HOUR, FULL_DAY_HOUR);
-                }
-                else
-                {
-                    EMPLOYEE_WEGES = emp.Calculate_Daily_Emoployee_Wages(EMPLOYEE_WEG_PER_HOUR, PARTIME_HOUR);
-                }
-            }
-            else
-            {
-                EMPLOYEE_WEGES = ABSENT;
-            }
-                System.out.println("Daily Employee Wage is : "+EMPLOYEE_WEGES);
+                case 0:
+                       PARTIME_OR_FULLTIME = emp.Check_Attendence();
+                       switch (PARTIME_OR_FULLTIME)
+                       {
+                           case 0:
+                                  EMPLOYEE_WEGES = emp.Calculate_Daily_Emoployee_Wages(EMPLOYEE_WEG_PER_HOUR, FULL_DAY_HOUR);
+                                  System.out.println("Daily Employee Wages : " + EMPLOYEE_WEGES);
+                                  break;
 
+                           case 1:
+                                  EMPLOYEE_WEGES = emp.Calculate_Daily_Emoployee_Wages(EMPLOYEE_WEG_PER_HOUR, PARTIME_HOUR);
+                                  System.out.println("Daily Employee Wages : " + EMPLOYEE_WEGES);
+                                  break;
+
+                           default:
+                                  break;
+                       }
+                       break;
+                case 1:
+                       EMPLOYEE_WEGES = ABSENT;
+                       System.out.println(" Employee Is Absent : " + EMPLOYEE_WEGES);
+                       break;
+                default:
+                      break;
+
+            }
         }
     }
