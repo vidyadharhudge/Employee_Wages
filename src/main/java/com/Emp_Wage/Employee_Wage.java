@@ -54,7 +54,10 @@ public class Employee_Wage
                                        break;
                 }
                 arr[countDays]=EMPLOYEE_WEGES;
+
                 countDays++;
+
+
                 Employee_Monthly_Wages+=EMPLOYEE_WEGES;
 
 
@@ -62,6 +65,7 @@ public class Employee_Wage
                 for (int i=0;i<20;i++)
                 {
                     System.out.println("Daily Wages are : "+arr[i]);
+                    System.out.println("days "+i+"= "+"DailyWagesAre : "+arr[i]);
 
                 }
                 System.out.println();
